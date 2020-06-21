@@ -12,7 +12,8 @@ router.post('/projects', (req, res, next) => {
   Project.create({
     title: req.body.title,
     description: req.body.description,
-    tasks: []
+    tasks: [],
+    owner: req.user._id 
   })
     .then(response => {
       res.json(response);
@@ -87,6 +88,8 @@ router.delete('/projects/:id', (req, res, next)=>{
       res.json(err);
     })
 })
+
+
 
 
 module.exports = router;

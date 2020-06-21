@@ -60,12 +60,25 @@ class ProjectDetails extends Component {
       }
   }
 
+  ownershipCheck = (project) => {
+    if(this.props.loggedInUser && project.owner == this.props.loggedInUser._id){
+      return (
+        <div>
+          <div>{this.renderEditForm()} </div>
+          <button onClick={() => this.deleteProject(this.state._id)}>Delete project</button>
+        </div>
+      )
+    } 
+  }
 
   render(){
     return(
       <div>
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
+        <div >
+        {this.ownershipCheck(this.state)}
+      </div>
 {/* show the task heading only if there are tasks */}
 { this.state.tasks && this.state.tasks.length > 0 && <h3>Tasks </h3> }
         {/* map through the array of tasks and... */}
